@@ -1,5 +1,5 @@
 # PREDICTIVE MAINTENANCE FOR TANZANIA’S WATER INFRASTRUCTURE: A MACHINE LEARNING APPROACH.
-
+![Tanzanian Borehole](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Tanzanian%20borehole.jpg)
 
 ### Author: Joy Achieng Ogutu
 
@@ -34,4 +34,103 @@ Tanzania's water infrastructure faces critical challenges, particularly in the f
 2. Objective: To assess the Impact of numeric variables on well functionality. This objective involves a comprehensive examination of the distribution and influence of numeric variables on well functionality. Analyse factors such as total static head, population around the well, and well altitude. Evaluate how these numeric features are distributed across various well conditions, providing insights into their individual and collective impact on well functionality.
 
 3. Objective: To create an advanced predictive maintenance model capable of identifying water wells requiring repair. Leveraging historical data encompassing pertinent features, a multifaceted approach involving various machine learning classifiers will be employed. The objective includes extensive testing and comparison of different models to determine the most accurate and reliable predictor for identifying wells in need of timely rehabilitation. This initiative aims to enhance the proactive management of water wells.
+
+### DATA UNDERSTANDING
+We will be using data from Taarifa and the Tanzanian Ministry of Water, to predict which pumps are functional, which need some repairs, and which don't work at all based on a number of variables about what kind of pump is operating, when it was installed, and how it is managed.
+The features in this dataset:
+- id - Unique identifier for a well
+- amount_tsh - Total static head (amount water available to waterpoint)
+- date_recorded - The date the row was entered
+- funder - Who funded the well
+- gps_height - Altitude of the well
+- installer - Organization that installed the well
+- longitude - GPS coordinate
+- latitude - GPS coordinate
+- wpt_name - Name of the waterpoint if there is one
+- num_private - No description
+ - basin - Geographic water basin
+ - subvillage - Geographic location
+ - region - Geographic location
+ - region_code - Geographic location (coded)
+ - district_code - Geographic location (coded)
+ - lga - Geographic location
+ - ward - Geographic location
+ - population - Population around the well
+ - public_meeting - True/False
+ - recorded_by - Group entering this row of data
+ - scheme_management - Who operates the waterpoint
+ - scheme_name - Who operates the waterpoint
+ - permit - If the waterpoint is permitted
+ - construction_year - Year the waterpoint was constructed
+ - extraction_type - The kind of extraction the waterpoint uses
+ - extraction_type_group - The kind of extraction the waterpoint uses
+ - extraction_type_class - The kind of extraction the waterpoint uses
+ - management - How the waterpoint is managed
+ - management_group - How the waterpoint is managed
+ - payment - What the water costs
+- payment_type - What the water costs
+- water_quality - The quality of the water
+- quality_group - The quality of the water
+- quantity - The quantity of water
+- quantity_group - The quantity of water
+- source - The source of the water
+- source_type - The source of the water
+- source_class - The source of the water
+- waterpoint_type - The kind of waterpoint
+- waterpoint_type_group - The kind of waterpoint
+- id - Unique identifier for a well
+
+The target values include: 
+- functional - the waterpoint is operational and there are no repairs needed
+- functional needs repair - the waterpoint is operational, but needs repairs
+- non functional - the waterpoint is not operational
+
+The status_group column shows the label or target for each pump, the other 40 columns are features, 10 of which are numerical, the rest are categorical.
+
+###  PREPARATION
+Data preparation is a crucial stage in this project for a number of reasons: 
+- Feature Engineering: New features might be developed or current ones modified in order to improve analysis. 
+- Handling Missing Data: Analysis results can be greatly impacted by missing data. In order to achieve a robust analysis, handling missing values must be decided, whether through imputation, deletion, or other suitable approaches. 
+- Outlier detection: For statistical validity, outliers must be found and dealt with. We can use methods like visual inspection or statistical testing to find outliers and handle them correctly with the help of data preparation.
+In the data preparation phase, several important actions were taken to ensure the dataset was ready for exploratory data analysis (EDA) and subsequent modelling:
+### Duplicate Values.
+There are no duplicates in the dataset.
+
+### Dropping of similar, highly correlated and irrelevant features.
+In this step we analyse the features to figure out which columns to drop.
+Based on the analysis, the following groups of features contain very similar information, so the correlation between them is high. This way we are risking overfitting the training data by including all the features in our analysis:
+(extraction_type, extraction_type_group, extraction_type_class)
+(payment, payment_type)
+(water_quality, quality_group)
+(source, source_class)
+(sub village, region, region_code, district_code, lga, ward)
+(waterpoint_type, waterpoint_type_group)
+(scheme_name, scheme_management)
+
+Besides, num_private is 99% zeros and has no description, so we cannot interpret it. In the wpt_name feature, there are 37,400 unique values out of 59,400 observations which is not very informative hence we will drop it. The recorded_by feature can be dropped as there is only 1 unique value, it doesn't help in predicting. The correlation between construction_year and gps_height is high, but these two variables don't have any obvious connection, so we will explore this correlation further to make a decision. As we saw earlier, there exists quite a strong correlation between district_code and region_code, so we will drop one of these variables. The negative correlation to the target variable of the region_code is higher than that of the district_code. Keep the variable with higher correlation to the target. The cardinality is too high for the following columns: funder, installer and subvillage therefore we will drop them. The rest can be one-hot encoded as the cardinality is lower than 10.
+
+### Null Value.
+All columns apart from permit have no null values. The null values were replaced with “unknown” in order to account for those values not known.
+
+### Data Type Conversion
+The date_recorded data type was converted from object to datetime.
+
+
+### Feature Engineering
+A new feature, well_age, is engineered by calculating the difference between the date_recorded and construction_year columns. However, due to the presence of 0 values in the construction_year column, the calculation may yield inaccurate results. To address this issue, these 0 values have been converted to NaN to ensure proper subtraction. Consequently, this transformation has introduced 20,709 null values in both the construction_year and well_year columns. These null values will be removed during subsequent data preprocessing steps.
+
+It is observed that there are instances in the dataset where the `date_recorded` (the date the record was entered) is in the year 2004, but the `construction_year` (the year the well was constructed) is after 2004. It may indicate potential data quality issues or inconsistencies in the dataset. This situation could be due to various reasons, and it's essential to investigate further to understand the possible explanations. Here are a few considerations:
+- Data Entry Errors:
+Human errors during data entry might lead to inconsistencies. It's possible that the year recorded when the data was entered (2004) could be a placeholder, an incorrect entry, or an anomaly.
+- Missing or Unknown Construction Year:
+It's also possible that the actual construction year is unknown or missing for some wells, and the year 2004 was used as a default or placeholder value. This might be done when the construction year is not available at the time of data recording.
+- Data Collection Process:
+The data collection process might have involved recording information at different times or through different methods. Inconsistent practices during data collection can result in such discrepancies.
+To solve this we only choose to remain with values greater than or equal to 0 in the well_year column.
+ 
+### Outliers
+Our analysis will consider these extreme values as legitimate components of the data, ensuring a comprehensive and contextually appropriate exploration of the dataset.
+ 
+### Categorization
+A practical and strategic consideration led to the decision to combine the objective variable into two categories: functional and non-functional. We choose a more direct and useful categorization by combining the functional needs repair category into non-functional. The main goal in real-world applications is to locate wells that are not performing at their best, whether they are completely non-functional or require repair. The consolidation of these statuses into a single non-functional category facilitates the prediction model's attention to wells that need care and guarantees a more pragmatic approach for stakeholders seeking to prioritise and handle maintenance activities. 
 

@@ -151,8 +151,6 @@ A crucial turning point in our investigation occurs during the data analysis sta
 
 Count Plots Summary
 
-![Count Plot Summary](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Categorical%20Count%20Plots.png)
-
 Summary of Count Plot Analysis:
 - extraction_type_group: The "gravity" extraction type has the most significant impact, with a higher proportion of functional wells compared to non-functional ones, while other extraction types show a higher likelihood of non-functionality.
 - permit: Wells with permits (True) have a higher proportion of functional status compared to non-functional ones. Wells with permits are more likely to be functional, indicating that having the necessary permits correlates with better well functionality.
@@ -166,11 +164,6 @@ Summary of Count Plot Analysis:
 ### Objective: To assess the Impact of numeric variables on well functionality.
 
 Histograms
-
-![Total Static Head](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Categorical%20Count%20Plots.png)
-![GPS Height]()
-![Population]()
-![Age of the well]()
 
 Histogram Summary:
 
@@ -218,8 +211,8 @@ The accuracy of 73.74% signifies that the model correctly predicted the status o
 
 Results:
 
-- Accuracy (0.7377)
-The SGD model achieved an accuracy of 73.77%. While this accuracy is respectable, it's important to note that it represents a marginal improvement over the Logistic Regression model's accuracy of 73.74%. The modest gain suggests that, in this specific context, the more complex and computationally intensive SGD algorithm might not provide a significant performance boost over the simpler Logistic Regression.
+- Accuracy (0.7390)
+The SGD model achieved an accuracy of 73.90%. While this accuracy is respectable, it's important to note that it represents a marginal improvement over the Logistic Regression model's accuracy of 73.74%. The modest gain suggests that, in this specific context, the more complex and computationally intensive SGD algorithm might not provide a significant performance boost over the simpler Logistic Regression.
 
 ![SGD Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/SGD%20Confusion%20Matrix.png)
 
@@ -227,8 +220,8 @@ The SGD model achieved an accuracy of 73.77%. While this accuracy is respectable
 
 Results:
 
-- Accuracy (77.29%):
-The model correctly predicted the status of the wells for 78.89% of instances in the test set. The accuracy of 77.29% represents a notable improvement over the logistic regression model (73.74%). This signifies that the XGBoost model correctly predicted the status of the wells for a higher proportion of instances in the test set.
+- Accuracy (0.8141):
+The model correctly predicted the status of the wells for 81.41% of instances in the test set. The accuracy of 77.29% represents a notable improvement over the logistic regression model (73.74%). This signifies that the XGBoost model correctly predicted the status of the wells for a higher proportion of instances in the test set.
 
 ![XGBoost Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/XGB%20Confusion%20Matrix.png)
 
@@ -236,8 +229,8 @@ The model correctly predicted the status of the wells for 78.89% of instances in
 
 Results:
 
-- Accuracy (0.8129):
-The accuracy of 81.22% signifies that the Random Forest model correctly predicted the status of the wells for approximately four-fifths of the instances in the test set. This reflects a notable improvement from the Logistic Regression model's accuracy of 73.74% and XGBoost model's accuracy of 77.29%.
+- Accuracy (0.8145):
+The accuracy of 81.45% signifies that the Random Forest model correctly predicted the status of the wells for approximately four-fifths of the instances in the test set. This reflects a notable improvement from the Logistic Regression model's accuracy of 73.74% and XGBoost model's accuracy of 81.41%.
 
 ![Random Forest Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Random%20Forest%20Confusion%20Matrix.png)
 

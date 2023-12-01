@@ -151,7 +151,7 @@ A crucial turning point in our investigation occurs during the data analysis sta
 
 Count Plots Summary
 
-![Count Plot Summary]()
+![Count Plot Summary](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Categorical%20Count%20Plots.png)
 
 Summary of Count Plot Analysis:
 - extraction_type_group: The "gravity" extraction type has the most significant impact, with a higher proportion of functional wells compared to non-functional ones, while other extraction types show a higher likelihood of non-functionality.
@@ -167,7 +167,7 @@ Summary of Count Plot Analysis:
 
 Histograms
 
-![Total Static Head]()
+![Total Static Head](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Categorical%20Count%20Plots.png)
 ![GPS Height]()
 ![Population]()
 ![Age of the well]()
@@ -182,7 +182,7 @@ The histograms for the mentioned columns – amount_tsh, gps_height, population,
 
 Geospatial Distribution Summary:
 
-![Geospatial]()
+![Geospatial](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Geospatial%20Distribution%20of%20Waterpoints.png)
 
 The geospatial distribution analysis provides valuable insights into the spatial characteristics of the water points in the dataset. Here's a summary of the geospatial distribution:
 
@@ -212,7 +212,7 @@ Stakeholders can use accuracy as a holistic measure of how well the model perfor
 - Accuracy (0.7374):
 The accuracy of 73.74% signifies that the model correctly predicted the status of the wells for approximately three-fourths of the instances in the test set.
 
-![Logistic Confusion Matrix]()
+![Logistic Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Logistic%20Confusion%20Matrix.png)
 
 ### SGD Model
 
@@ -221,7 +221,7 @@ Results:
 - Accuracy (0.7377)
 The SGD model achieved an accuracy of 73.77%. While this accuracy is respectable, it's important to note that it represents a marginal improvement over the Logistic Regression model's accuracy of 73.74%. The modest gain suggests that, in this specific context, the more complex and computationally intensive SGD algorithm might not provide a significant performance boost over the simpler Logistic Regression.
 
-![SGD Confusion Matrix]()
+![SGD Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/SGD%20Confusion%20Matrix.png)
 
 ### XGBoost Model
 
@@ -230,7 +230,7 @@ Results:
 - Accuracy (77.29%):
 The model correctly predicted the status of the wells for 78.89% of instances in the test set. The accuracy of 77.29% represents a notable improvement over the logistic regression model (73.74%). This signifies that the XGBoost model correctly predicted the status of the wells for a higher proportion of instances in the test set.
 
-![XGBoost Confusion Matrix]()
+![XGBoost Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/XGB%20Confusion%20Matrix.png)
 
 ### Random Forest Model
 
@@ -239,7 +239,7 @@ Results:
 - Accuracy (0.8129):
 The accuracy of 81.22% signifies that the Random Forest model correctly predicted the status of the wells for approximately four-fifths of the instances in the test set. This reflects a notable improvement from the Logistic Regression model's accuracy of 73.74% and XGBoost model's accuracy of 77.29%.
 
-![Random Forest Confusion Matrix]()
+![Random Forest Confusion Matrix](https://github.com/Ogutu01/Tanzania-Water-Infrastructure/blob/master/images.png/Random%20Forest%20Confusion%20Matrix.png)
 
 ### Tuned Random Forest Model:
 
